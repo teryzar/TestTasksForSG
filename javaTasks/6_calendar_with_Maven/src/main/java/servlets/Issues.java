@@ -22,7 +22,7 @@ import pojo.issues.SelectIssueListTemplate;
 import utils.database.AddIssue;
 import utils.database.DataHelper;
 
-public class AllIssues extends HttpServlet {
+public class Issues extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

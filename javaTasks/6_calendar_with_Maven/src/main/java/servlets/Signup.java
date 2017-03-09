@@ -13,9 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pojo.issues.InsertIssueTemplate;
+import pojo.errors.ErrorTemplate;
 import pojo.users.InsertUserTemplate;
-import utils.database.AddIssue;
+import pojo.users.InsertedUserTemplate;
 import utils.database.AddUser;
 
 /**
@@ -63,7 +63,7 @@ public class Signup extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                //преобразовіваем JSON запрос в строку
+        //преобразовіваем JSON запрос в строку
         StringBuffer jb = new StringBuffer();
         String line = null;
         try {
@@ -78,7 +78,20 @@ public class Signup extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         InsertUserTemplate userToAdd = mapper.readValue(sourceJson, InsertUserTemplate.class);
         //преобразрвіваем JSON в обьект и добавляем его в базу данных
-        AddUser.addUser(userToAdd);
+        int status = AddUser.addUser(userToAdd, request.getSession().getId());
+        try (PrintWriter out = response.getWriter()) {
+            if (status == 200) {
+                InsertedUserTemplate userTempl = new InsertedUserTemplate(status, request.getSession().getId());
+                mapper.writeValue(out, userTempl);
+            } else {
+                response.setStatus(status);
+                ErrorTemplate error = new ErrorTemplate(status, "do text generator for errors!!!");
+                mapper.writeValue(out, error);
+            }
+
+        } catch (Exception e) {
+            //do somthing
+        }
     }
 
     /**

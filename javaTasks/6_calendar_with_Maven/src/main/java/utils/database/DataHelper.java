@@ -29,11 +29,21 @@ public class DataHelper {
         return sessionFactory.openSession();
     }
 
-    public void addUser(User userToAdd) {
-        Session session = getSession();
-        Transaction tx = session.beginTransaction();
-        session.save(userToAdd);
-        tx.commit();
+    public int addUser(User userToAdd) {
+        int status;
+        try {
+            Session session = getSession();
+            Transaction tx = session.beginTransaction();
+            session.save(userToAdd);
+            tx.commit();
+            status = 200;
+        } catch (ConstraintViolationException e) {
+            //тут сформируем правильній ответ, если такой логин уже есть
+            System.out.println(e.getSQLException());
+            status = 409;
+
+        }
+        return status;
     }
 
     public List<Integer> getIssuesIds() {
@@ -44,20 +54,11 @@ public class DataHelper {
         return (Issue) getSession().createCriteria(Issue.class).add(Restrictions.eq("id", id)).uniqueResult();
     }
 
-    public int addIssue(Issue issue) {
-        int status;
-        try {
-            Session session = getSession();
-            Transaction tx = session.beginTransaction();
-            session.save(issue);
-            tx.commit();
-            status = 200;
-        } catch (ConstraintViolationException e) {
-            //тут сформируем правильній ответ, если такой логин уже есть
-            System.out.println(e.getSQLException());
-            status = 409;
-        }
-        return status;
+    public void addIssue(Issue issue) {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        session.save(issue);
+        tx.commit();
     }
 
     //получаем все комментарии, связанніе с конкретной Issue

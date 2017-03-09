@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>AllIssues</servlet-name>
-        <servlet-class>servlets.AllIssues</servlet-class>
+        <servlet-class>servlets.Issues</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Tickets</servlet-name>
