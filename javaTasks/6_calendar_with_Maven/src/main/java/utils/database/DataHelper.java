@@ -46,6 +46,10 @@ public class DataHelper {
         return status;
     }
 
+    public User getUser(String username) {
+        return (User) getSession().createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
+    }
+
     public List<Integer> getIssuesIds() {
         return getSession().createSQLQuery("select id from issue").list();
     }
