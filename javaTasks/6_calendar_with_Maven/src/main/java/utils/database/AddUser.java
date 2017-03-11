@@ -29,7 +29,7 @@ public class AddUser {
 //                null, null, 0);
         User user = DataHelper.getInstance().getUser(userToAdd.getUser());
         //записываем обьект в базу данных
-        DataHelper.getInstance().addUser(user);
+//        DataHelper.getInstance().addUser(user);
         LoggedUserMap.loggedUserMap.put(sessionId, user);
         return status;
     }

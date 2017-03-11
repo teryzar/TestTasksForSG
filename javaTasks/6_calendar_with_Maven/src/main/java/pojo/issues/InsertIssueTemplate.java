@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class InsertIssueTemplate {
     @JsonProperty("token")
-    Long token;
+    String token;
     @JsonProperty("user_id")
     int user_id;
     @JsonProperty("title")
@@ -21,7 +21,7 @@ public class InsertIssueTemplate {
     public InsertIssueTemplate() {
     }
 
-    public InsertIssueTemplate(Long token, int user_id, String title, String description, int status) {
+    public InsertIssueTemplate(String token, int user_id, String title, String description, int status) {
         this.token = token;
         this.user_id = user_id;
         this.title = title;
@@ -29,11 +29,11 @@ public class InsertIssueTemplate {
         this.status = status;
     }
 
-    public Long getToken() {
+    public String getToken() {
         return token;
     }
 
-    public void setToken(Long token) {
+    public void setToken(String token) {
         this.token = token;
     }
 
