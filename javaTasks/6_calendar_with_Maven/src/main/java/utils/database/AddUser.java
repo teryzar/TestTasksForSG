@@ -21,15 +21,10 @@ public class AddUser {
     }
 
     public static int loginUser(InsertUserTemplate userToAdd, String sessionId) {
-        int status = 200;
+        int status = 200; //заглушка
         String authToken = userToAdd.getAuthtoken();
         UserValidator.verifyUserRights(authToken);
-        //преобразовываем полученные в запросе значения в POJO для Hibernate
-//        User user = new User(userToAdd.getUser(), userToAdd.getPassword(),
-//                null, null, 0);
         User user = DataHelper.getInstance().getUser(userToAdd.getUser());
-        //записываем обьект в базу данных
-//        DataHelper.getInstance().addUser(user);
         LoggedUserMap.loggedUserMap.put(sessionId, user);
         return status;
     }
