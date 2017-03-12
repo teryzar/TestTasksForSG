@@ -3,14 +3,14 @@ package myjava;
 
 public class Palindroms {
 
-    //Метод checkPalindroms принимает две строки, переворачивает с помощью StringBuilder, проверяет идентичны лм переданная и переввернутая строка.
-    public static boolean checkPalindroms(String str1){
-        StringBuffer sbf = new StringBuffer(str1).reverse();
-        String str2 = String.valueOf(sbf);
-        if (str1.equals(str2)) return true;
-        else
-            return false;
+    public static boolean checkPalindroms(String str1) {
+        //прокатимся по строке с двух концов и сравним символы в начале и конце
+        for (int i = 0; i < str1.length() / 2; ++i) {
+            // Сравниваем символ с начала и конца
+            if (str1.charAt(i) != str1.charAt(str1.length() - i - 1)) {
+                return false; // символы не равны, не полиндром, возвращаем фальшь
+            }
+        }
+        return true; // проверка не выявила несовпадающих символов, возвращаем истину
     }
-
-
 }

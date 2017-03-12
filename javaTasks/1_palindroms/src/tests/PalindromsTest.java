@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class PalindromsTest extends TestCase {
     @org.junit.Test
     public void testCheckPalindroms() throws Exception {
-        String s = "assa";
+        String s = "asksa";
         if (!checkPalindroms(s)) Assert.fail("fail");
     }
 
