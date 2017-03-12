@@ -19,12 +19,4 @@ public class KComplVariant2 {
         return result;
     }
 
-    public static void main(String[] args) {
-        int[] arr = new int[] {7, -1, 1, -7, 0, 4, 3, 2, -5, -6, 8};
-        List<ComplementaryPair> lst = findCompl(arr, 5);
-        for (ComplementaryPair c : lst) {
-            System.out.println(c.getFirst() + " " + c.getSecond());
-        }
-
-    }
 }
