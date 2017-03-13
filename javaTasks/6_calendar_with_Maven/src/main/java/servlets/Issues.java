@@ -1,6 +1,8 @@
 package servlets;
 
-//Сервлет для обработки запросов связаных с Issue 
+/**
+ * Servlet processing requests for issues
+ */
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,26 +26,17 @@ import utils.database.DataHelper;
 
 public class Issues extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
-     * @param response servlet response
+     * 
+     * @param request servlet request in JSON
+     * @param response servlet response in JSON
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

@@ -6,8 +6,7 @@ import java.util.*;
 
 /**
  * An object that finds the most recent substrings in the file
- *
- * */
+ */
 
 
 public class ReadingFile {
@@ -19,7 +18,8 @@ public class ReadingFile {
 
     /**
      * Finds top 100 000 substrings in the file
-     * @param fileName - path to a file on a filesystem
+     *
+     * @param fileName  - path to a file on a filesystem
      * @param delimiter - character or strong whitch separates substrings   
      * @return returns top 100 000 list of substrings
      */
@@ -41,13 +41,8 @@ public class ReadingFile {
                 if (tokenizer.hasMoreTokens()) {
                     String token = tokenizer.nextToken();
                     while (true) {
-                        //Если такая строка уже была в файле добавляем к частоте +1, если нет - присваиваем 1
-                        if (!frqMap.containsKey(token)) {
-                            frqMap.put(token, 1);
-                        } else {
-                            int freq = frqMap.get(token) + 1;
-                            frqMap.put(token, freq);
-                        }
+
+                        updateMap(token);
 
                         if (tokenizer.hasMoreTokens()) token = tokenizer.nextToken();
                         else break;
@@ -64,6 +59,7 @@ public class ReadingFile {
             e.printStackTrace();
         }
 
+
         Map<String, Integer> sortedMap = SorterByValue.sortByValue(frqMap);
         frqMap.clear(); //очищаем оперативною память
 
@@ -74,6 +70,20 @@ public class ReadingFile {
         return listOfKeys;
     }
 
+    /**
+     * Adding key with int = 1 int @see ReadingFile.frqMap if map does not contain key "token"
+     * Incrementing value if contains "token"
+     * @param token
+     */
+    public static void updateMap(String token) {
+        //Если такая строка уже была в файле добавляем к частоте +1, если нет - присваиваем 1
+        if (!frqMap.containsKey(token)) {
+            frqMap.put(token, 1);
+        } else {
+            int freq = frqMap.get(token) + 1;
+            frqMap.put(token, freq);
+        }
+    }
 
 
 }

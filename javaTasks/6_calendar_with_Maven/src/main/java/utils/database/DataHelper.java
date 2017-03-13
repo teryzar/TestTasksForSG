@@ -1,6 +1,9 @@
 package utils.database;
 
-//в этом классе организована работа с базой данных, комментарии излищни названия методов говорят сами за себя
+/**
+ * Class that provides all database magic. Every query is being generated here 
+ */
+
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;

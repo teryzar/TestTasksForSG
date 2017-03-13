@@ -1,4 +1,7 @@
 package pojo.errors;
+/**
+ * POJO class to convert error messages to response
+ */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,10 +13,19 @@ public class ErrorTemplate {
 
     public ErrorTemplate() {
     }
-
-    public ErrorTemplate(int status, String message) {
+    
+    /*
+    *Constructor
+    *@param gets an error status and generates text
+    */
+    
+    public ErrorTemplate(int status) {
         this.status = status;
-        this.message = message;
+        if (status == 400) message = "Bad Request" ;
+        else if (status == 401) message = "Bad Auth token";
+        else if (status == 403) message = "Forbidden";
+        else if (status == 409) message = "Username exists";
+        else if (status == 412) message = "Precondition failed";
     }
 
     public int getStatus() {
@@ -31,6 +43,8 @@ public class ErrorTemplate {
     public void setMessage(String message) {
         this.message = message;
     }
+    
+
     
     
 }

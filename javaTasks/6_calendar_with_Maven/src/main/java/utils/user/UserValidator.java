@@ -1,6 +1,9 @@
 package utils.user;
 
-//класс для проверки полномочий пользователя
+/**
+ * Validates user rights to execuse any actions
+ * @author Andrey
+ */
 
 public class UserValidator {
 

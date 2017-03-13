@@ -18,7 +18,7 @@ public class ReadingFileTest extends TestCase {
         List<String> top = findTop100K("1.txt", " ");
         int i = 5;
         for (String s : top) {
-            String template = "Фраза " + i;
+            String template = "Фраза " + String.valueOf(i);
             if (!s.equals(template)) Assert.fail();
         }
     }
