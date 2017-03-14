@@ -2,7 +2,7 @@ package ua.dubrovskiy.java;
 
 /**
  * An object that sorts Map by value
- * <p>Found in Google so i do not really understand what do it do<p/>
+ * Found in Google so i do not really understand what does it do
  * */
 
 import java.util.*;

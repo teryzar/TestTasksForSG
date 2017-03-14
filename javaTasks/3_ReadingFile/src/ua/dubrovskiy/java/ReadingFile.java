@@ -59,14 +59,24 @@ public class ReadingFile {
             e.printStackTrace();
         }
 
-
+        //Сортируем карту по значению
         Map<String, Integer> sortedMap = SorterByValue.sortByValue(frqMap);
-        frqMap.clear(); //очищаем оперативною память
+        //очищаем оперативною память
+        frqMap.clear();
 
+        //переносим все в List
         Set<String> keySet = sortedMap.keySet();
         ArrayList<String> listOfKeys = new ArrayList<String>(keySet);
-        keySet.clear(); //очищаем оперативную память
+        //очищаем оперативную память
+        keySet.clear();
+        //разворачиваем список по убіванию
         Collections.reverse(listOfKeys);
+        //отсекаем все что ниже 100тісячной позиции
+        if (listOfKeys.size() > 100000) {
+            for (int i = 100000; i < listOfKeys.size() - 1; i++) {
+                listOfKeys.remove(i);
+            }
+        }
         return listOfKeys;
     }
 
