@@ -49,8 +49,8 @@ public class DataHelper {
         return status;
     }
 
-    public User getUser(String username) {
-        return (User) getSession().createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
+    public User getUser(String username, String password) {
+        return (User) getSession().createCriteria(User.class).add(Restrictions.eq("username", username)).add(Restrictions.eq("password", password)).uniqueResult();
     }
 
     public List<Integer> getIssuesIds() {

@@ -9,7 +9,7 @@ public class AddIssue {
 
     public static void addIssue(InsertIssueTemplate issueToinsert) {
         String token = issueToinsert.getToken();
-        UserValidator.verifyUserRights(token);
+        UserValidator.verifyUserLoggedOn(token);
         //преобразовываем полученные в запросе значения в POJO для Hibernate
         if (LoggedUserMap.loggedUserMap.containsKey(token)) {
             Issue issueToAdd = new Issue(issueToinsert.getTitle(), issueToinsert.getDescription(),

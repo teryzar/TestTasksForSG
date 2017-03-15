@@ -1,16 +1,27 @@
-package utils.database;
+package utils.user;
 
+/**
+ * Adding or logging user in
+ */
 import entity.User;
 import pojo.users.InsertUserTemplate;
+import utils.database.DataHelper;
 import utils.user.LoggedUserMap;
 import utils.user.UserValidator;
 
-public class AddUser {
+public class UserActions {
 
+    /**
+     * Adds new user into database
+     *
+     * @param userToAdd Converted from JSON
+     * @param sessionId SessionID that would be a token for user
+     * @return status code of operation
+     */
     public static int addUser(InsertUserTemplate userToAdd, String sessionId) {
         int status;
         String authToken = userToAdd.getAuthtoken();
-        UserValidator.verifyUserRights(authToken);
+        UserValidator.verifyAuthToken(authToken);
         //преобразовываем полученные в запросе значения в POJO для Hibernate
         User user = new User(userToAdd.getUser(), userToAdd.getPassword(),
                 null, null, 0);
@@ -21,11 +32,16 @@ public class AddUser {
     }
 
     public static int loginUser(InsertUserTemplate userToAdd, String sessionId) {
-        int status = 200; //заглушка
+        int status = 400;
         String authToken = userToAdd.getAuthtoken();
-        UserValidator.verifyUserRights(authToken);
-        User user = DataHelper.getInstance().getUser(userToAdd.getUser());
-        LoggedUserMap.loggedUserMap.put(sessionId, user);
+        UserValidator.verifyAuthToken(authToken);
+        User user = DataHelper.getInstance().getUser(userToAdd.getUser(), userToAdd.getPassword());
+        if (user == null) {
+            status = 400;
+        } else {
+            LoggedUserMap.loggedUserMap.put(sessionId, user);
+            status = 200;
+        }
         return status;
     }
 

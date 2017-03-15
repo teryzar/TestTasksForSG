@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import pojo.errors.ErrorTemplate;
 import pojo.users.InsertUserTemplate;
 import pojo.users.InsertedUserTemplate;
-import utils.database.AddUser;
+import utils.user.UserActions;
 
 /**
  * Allows user to signup
@@ -53,7 +53,7 @@ public class Signup extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         InsertUserTemplate userToAdd = mapper.readValue(sourceJson, InsertUserTemplate.class);
         //преобразрвіваем JSON в обьект и добавляем его в базу данных
-        int status = AddUser.addUser(userToAdd, request.getSession().getId());
+        int status = UserActions.addUser(userToAdd, request.getSession().getId());
         try (PrintWriter out = response.getWriter()) {
             if (status == 200) {
                 InsertedUserTemplate userTempl = new InsertedUserTemplate(status, request.getSession().getId());
